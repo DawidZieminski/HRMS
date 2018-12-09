@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e0a5d04e93624fc5a26aeb8fe9479b50" Name="Diagram1" ZoomLevel="81">
+        <EntityTypeShape EntityType="HRMS_DBModel.Employee_Types" Width="1.5" PointX="0.5" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS_DBModel.Employees" Width="1.5" PointX="4.75" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS_DBModel.Equipments" Width="1.5" PointX="7.125" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS_DBModel.Grades" Width="1.5" PointX="2.625" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS_DBModel.Obiect" Width="1.5" PointX="4.625" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS_DBModel.Presences" Width="1.5" PointX="6.875" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS_DBModel.Projects" Width="1.5" PointX="9" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS_DBModel.Salary" Width="1.5" PointX="2.625" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS_DBModel.Status" Width="1.5" PointX="8.875" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRMS_DBModel.User" Width="1.5" PointX="0.5" PointY="2.75" IsExpanded="true" />
+        <AssociationConnector Association="HRMS_DBModel.FK__Salary__EmployeeType_ID" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS_DBModel.FK__Employees__GradeID" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS_DBModel.FK__Employees__SalaryID" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS_DBModel.FK__Employees__UserID" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS_DBModel.FK__Presences__EmpID" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS_DBModel.FK__Equipments__ObiectID" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS_DBModel.FK__Presences__ObiectID" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS_DBModel.FK__Projects__ObiectID" ManuallyRouted="false" />
+        <AssociationConnector Association="HRMS_DBModel.FK__Presences__StatusID" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<h2>Index</h2>
+Welcome @HttpContext.Current.User.Identity.Name
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("Wtloguj", "User", FormMethod.Post, new { id = "logoutForm" }))
+    {
+        <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>
+    }
+}
+<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">  @Html.ActionLink("Zerejestruj się", "Registration", "User")</p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+

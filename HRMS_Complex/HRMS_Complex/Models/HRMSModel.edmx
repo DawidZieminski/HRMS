@@ -1,0 +1,661 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HRMS_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Employee_Types">
+          <Key>
+            <PropertyRef Name="EmployeeType_ID" />
+          </Key>
+          <Property Name="EmployeeType_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Employee_Type" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="EmpID" />
+          </Key>
+          <Property Name="EmpID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mobile" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="AccountNumber" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="1000" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="SalaryID" Type="int" Nullable="false" />
+          <Property Name="GradeID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Equipments">
+          <Key>
+            <PropertyRef Name="EquipmentID" />
+          </Key>
+          <Property Name="EquipmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EquipmentName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EquipmentQuantity" Type="decimal" Precision="19" Scale="2" />
+          <Property Name="ObiectID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grades">
+          <Key>
+            <PropertyRef Name="GradeID" />
+          </Key>
+          <Property Name="GradeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Grade_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Grade_Salary" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Obiect">
+          <Key>
+            <PropertyRef Name="ObiectID" />
+          </Key>
+          <Property Name="ObiectID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameObiect" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LocationObiect" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Presences">
+          <Key>
+            <PropertyRef Name="PresenceID" />
+          </Key>
+          <Property Name="PresenceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InTime" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="OutTime" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="Presence_Date" Type="datetime" Nullable="false" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="EmpID" Type="int" Nullable="false" />
+          <Property Name="ObiectID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DataProjectStart" Type="datetime" />
+          <Property Name="DataProjectEnd" Type="datetime" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="ObiectID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Salary">
+          <Key>
+            <PropertyRef Name="SalaryID" />
+          </Key>
+          <Property Name="SalaryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SalaryValue" Type="decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="EmployeeType_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StatusName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Last_Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="DOB" Type="datetime" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Employees__GradeID">
+          <End Role="Grades" Type="Self.Grades" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grades">
+              <PropertyRef Name="GradeID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="GradeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employees__SalaryID">
+          <End Role="Salary" Type="Self.Salary" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salary">
+              <PropertyRef Name="SalaryID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="SalaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employees__UserID">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Equipments__ObiectID">
+          <End Role="Obiect" Type="Self.Obiect" Multiplicity="1" />
+          <End Role="Equipments" Type="Self.Equipments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Obiect">
+              <PropertyRef Name="ObiectID" />
+            </Principal>
+            <Dependent Role="Equipments">
+              <PropertyRef Name="ObiectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Presences__EmpID">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Presences" Type="Self.Presences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="Presences">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Presences__ObiectID">
+          <End Role="Obiect" Type="Self.Obiect" Multiplicity="1" />
+          <End Role="Presences" Type="Self.Presences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Obiect">
+              <PropertyRef Name="ObiectID" />
+            </Principal>
+            <Dependent Role="Presences">
+              <PropertyRef Name="ObiectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Presences__StatusID">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Presences" Type="Self.Presences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="Presences">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Projects__ObiectID">
+          <End Role="Obiect" Type="Self.Obiect" Multiplicity="1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Obiect">
+              <PropertyRef Name="ObiectID" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="ObiectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Salary__EmployeeType_ID">
+          <End Role="Employee_Types" Type="Self.Employee_Types" Multiplicity="1" />
+          <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee_Types">
+              <PropertyRef Name="EmployeeType_ID" />
+            </Principal>
+            <Dependent Role="Salary">
+              <PropertyRef Name="EmployeeType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HRMS_DBModelStoreContainer">
+          <EntitySet Name="Employee_Types" EntityType="Self.Employee_Types" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Equipments" EntityType="Self.Equipments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grades" EntityType="Self.Grades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Obiect" EntityType="Self.Obiect" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Presences" EntityType="Self.Presences" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Salary" EntityType="Self.Salary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Employees__GradeID" Association="Self.FK__Employees__GradeID">
+            <End Role="Grades" EntitySet="Grades" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employees__SalaryID" Association="Self.FK__Employees__SalaryID">
+            <End Role="Salary" EntitySet="Salary" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employees__UserID" Association="Self.FK__Employees__UserID">
+            <End Role="User" EntitySet="User" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Equipments__ObiectID" Association="Self.FK__Equipments__ObiectID">
+            <End Role="Obiect" EntitySet="Obiect" />
+            <End Role="Equipments" EntitySet="Equipments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Presences__EmpID" Association="Self.FK__Presences__EmpID">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Presences" EntitySet="Presences" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Presences__ObiectID" Association="Self.FK__Presences__ObiectID">
+            <End Role="Obiect" EntitySet="Obiect" />
+            <End Role="Presences" EntitySet="Presences" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Presences__StatusID" Association="Self.FK__Presences__StatusID">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Presences" EntitySet="Presences" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Projects__ObiectID" Association="Self.FK__Projects__ObiectID">
+            <End Role="Obiect" EntitySet="Obiect" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Salary__EmployeeType_ID" Association="Self.FK__Salary__EmployeeType_ID">
+            <End Role="Employee_Types" EntitySet="Employee_Types" />
+            <End Role="Salary" EntitySet="Salary" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HRMS_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Employee_Types">
+          <Key>
+            <PropertyRef Name="EmployeeType_ID" />
+          </Key>
+          <Property Name="EmployeeType_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Employee_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Salary" Relationship="Self.FK__Salary__EmployeeType_ID" FromRole="Employee_Types" ToRole="Salary" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="EmpID" />
+          </Key>
+          <Property Name="EmpID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AccountNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="SalaryID" Type="Int32" Nullable="false" />
+          <Property Name="GradeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Grades" Relationship="Self.FK__Employees__GradeID" FromRole="Employees" ToRole="Grades" />
+          <NavigationProperty Name="Salary" Relationship="Self.FK__Employees__SalaryID" FromRole="Employees" ToRole="Salary" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Employees__UserID" FromRole="Employees" ToRole="User" />
+          <NavigationProperty Name="Presences" Relationship="Self.FK__Presences__EmpID" FromRole="Employees" ToRole="Presences" />
+        </EntityType>
+        <EntityType Name="Equipments">
+          <Key>
+            <PropertyRef Name="EquipmentID" />
+          </Key>
+          <Property Name="EquipmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EquipmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EquipmentQuantity" Type="Decimal" Precision="19" Scale="2" />
+          <Property Name="ObiectID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Obiect" Relationship="Self.FK__Equipments__ObiectID" FromRole="Equipments" ToRole="Obiect" />
+        </EntityType>
+        <EntityType Name="Grades">
+          <Key>
+            <PropertyRef Name="GradeID" />
+          </Key>
+          <Property Name="GradeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Grade_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Grade_Salary" Type="Decimal" Precision="19" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__GradeID" FromRole="Grades" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="Obiect">
+          <Key>
+            <PropertyRef Name="ObiectID" />
+          </Key>
+          <Property Name="ObiectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameObiect" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LocationObiect" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Equipments" Relationship="Self.FK__Equipments__ObiectID" FromRole="Obiect" ToRole="Equipments" />
+          <NavigationProperty Name="Presences" Relationship="Self.FK__Presences__ObiectID" FromRole="Obiect" ToRole="Presences" />
+          <NavigationProperty Name="Projects" Relationship="Self.FK__Projects__ObiectID" FromRole="Obiect" ToRole="Projects" />
+        </EntityType>
+        <EntityType Name="Presences">
+          <Key>
+            <PropertyRef Name="PresenceID" />
+          </Key>
+          <Property Name="PresenceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InTime" Type="Decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="OutTime" Type="Decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="Presence_Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="EmpID" Type="Int32" Nullable="false" />
+          <Property Name="ObiectID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Presences__EmpID" FromRole="Presences" ToRole="Employees" />
+          <NavigationProperty Name="Obiect" Relationship="Self.FK__Presences__ObiectID" FromRole="Presences" ToRole="Obiect" />
+          <NavigationProperty Name="Status" Relationship="Self.FK__Presences__StatusID" FromRole="Presences" ToRole="Status" />
+        </EntityType>
+        <EntityType Name="Projects">
+          <Key>
+            <PropertyRef Name="ProjectId" />
+          </Key>
+          <Property Name="ProjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DataProjectStart" Type="DateTime" Precision="3" />
+          <Property Name="DataProjectEnd" Type="DateTime" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ObiectID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Obiect" Relationship="Self.FK__Projects__ObiectID" FromRole="Projects" ToRole="Obiect" />
+        </EntityType>
+        <EntityType Name="Salary">
+          <Key>
+            <PropertyRef Name="SalaryID" />
+          </Key>
+          <Property Name="SalaryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SalaryValue" Type="Decimal" Precision="19" Scale="2" Nullable="false" />
+          <Property Name="EmployeeType_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Employee_Types" Relationship="Self.FK__Salary__EmployeeType_ID" FromRole="Salary" ToRole="Employee_Types" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__SalaryID" FromRole="Salary" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Presences" Relationship="Self.FK__Presences__StatusID" FromRole="Status" ToRole="Presences" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Employees__UserID" FromRole="User" ToRole="Employees" />
+        </EntityType>
+        <Association Name="FK__Salary__EmployeeType_ID">
+          <End Role="Employee_Types" Type="Self.Employee_Types" Multiplicity="1" />
+          <End Role="Salary" Type="Self.Salary" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee_Types">
+              <PropertyRef Name="EmployeeType_ID" />
+            </Principal>
+            <Dependent Role="Salary">
+              <PropertyRef Name="EmployeeType_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employees__GradeID">
+          <End Role="Grades" Type="Self.Grades" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grades">
+              <PropertyRef Name="GradeID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="GradeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employees__SalaryID">
+          <End Role="Salary" Type="Self.Salary" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salary">
+              <PropertyRef Name="SalaryID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="SalaryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Employees__UserID">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Presences__EmpID">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Presences" Type="Self.Presences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="EmpID" />
+            </Principal>
+            <Dependent Role="Presences">
+              <PropertyRef Name="EmpID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Equipments__ObiectID">
+          <End Role="Obiect" Type="Self.Obiect" Multiplicity="1" />
+          <End Role="Equipments" Type="Self.Equipments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Obiect">
+              <PropertyRef Name="ObiectID" />
+            </Principal>
+            <Dependent Role="Equipments">
+              <PropertyRef Name="ObiectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Presences__ObiectID">
+          <End Role="Obiect" Type="Self.Obiect" Multiplicity="1" />
+          <End Role="Presences" Type="Self.Presences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Obiect">
+              <PropertyRef Name="ObiectID" />
+            </Principal>
+            <Dependent Role="Presences">
+              <PropertyRef Name="ObiectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Projects__ObiectID">
+          <End Role="Obiect" Type="Self.Obiect" Multiplicity="1" />
+          <End Role="Projects" Type="Self.Projects" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Obiect">
+              <PropertyRef Name="ObiectID" />
+            </Principal>
+            <Dependent Role="Projects">
+              <PropertyRef Name="ObiectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Presences__StatusID">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Presences" Type="Self.Presences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="Presences">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HRMS_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Employee_Types" EntityType="Self.Employee_Types" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" />
+          <EntitySet Name="Equipments" EntityType="Self.Equipments" />
+          <EntitySet Name="Grades" EntityType="Self.Grades" />
+          <EntitySet Name="Obiect" EntityType="Self.Obiect" />
+          <EntitySet Name="Presences" EntityType="Self.Presences" />
+          <EntitySet Name="Projects" EntityType="Self.Projects" />
+          <EntitySet Name="Salary" EntityType="Self.Salary" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK__Salary__EmployeeType_ID" Association="Self.FK__Salary__EmployeeType_ID">
+            <End Role="Employee_Types" EntitySet="Employee_Types" />
+            <End Role="Salary" EntitySet="Salary" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employees__GradeID" Association="Self.FK__Employees__GradeID">
+            <End Role="Grades" EntitySet="Grades" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employees__SalaryID" Association="Self.FK__Employees__SalaryID">
+            <End Role="Salary" EntitySet="Salary" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Employees__UserID" Association="Self.FK__Employees__UserID">
+            <End Role="User" EntitySet="User" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Presences__EmpID" Association="Self.FK__Presences__EmpID">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Presences" EntitySet="Presences" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Equipments__ObiectID" Association="Self.FK__Equipments__ObiectID">
+            <End Role="Obiect" EntitySet="Obiect" />
+            <End Role="Equipments" EntitySet="Equipments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Presences__ObiectID" Association="Self.FK__Presences__ObiectID">
+            <End Role="Obiect" EntitySet="Obiect" />
+            <End Role="Presences" EntitySet="Presences" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Projects__ObiectID" Association="Self.FK__Projects__ObiectID">
+            <End Role="Obiect" EntitySet="Obiect" />
+            <End Role="Projects" EntitySet="Projects" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Presences__StatusID" Association="Self.FK__Presences__StatusID">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Presences" EntitySet="Presences" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HRMS_DBModelStoreContainer" CdmEntityContainer="HRMS_DBEntities">
+          <EntitySetMapping Name="Employee_Types">
+            <EntityTypeMapping TypeName="HRMS_DBModel.Employee_Types">
+              <MappingFragment StoreEntitySet="Employee_Types">
+                <ScalarProperty Name="EmployeeType_ID" ColumnName="EmployeeType_ID" />
+                <ScalarProperty Name="Employee_Type" ColumnName="Employee_Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="HRMS_DBModel.Employees">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="SalaryID" ColumnName="SalaryID" />
+                <ScalarProperty Name="GradeID" ColumnName="GradeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipments">
+            <EntityTypeMapping TypeName="HRMS_DBModel.Equipments">
+              <MappingFragment StoreEntitySet="Equipments">
+                <ScalarProperty Name="EquipmentID" ColumnName="EquipmentID" />
+                <ScalarProperty Name="EquipmentName" ColumnName="EquipmentName" />
+                <ScalarProperty Name="EquipmentQuantity" ColumnName="EquipmentQuantity" />
+                <ScalarProperty Name="ObiectID" ColumnName="ObiectID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grades">
+            <EntityTypeMapping TypeName="HRMS_DBModel.Grades">
+              <MappingFragment StoreEntitySet="Grades">
+                <ScalarProperty Name="GradeID" ColumnName="GradeID" />
+                <ScalarProperty Name="Grade_Name" ColumnName="Grade_Name" />
+                <ScalarProperty Name="Grade_Salary" ColumnName="Grade_Salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Obiect">
+            <EntityTypeMapping TypeName="HRMS_DBModel.Obiect">
+              <MappingFragment StoreEntitySet="Obiect">
+                <ScalarProperty Name="ObiectID" ColumnName="ObiectID" />
+                <ScalarProperty Name="NameObiect" ColumnName="NameObiect" />
+                <ScalarProperty Name="LocationObiect" ColumnName="LocationObiect" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Presences">
+            <EntityTypeMapping TypeName="HRMS_DBModel.Presences">
+              <MappingFragment StoreEntitySet="Presences">
+                <ScalarProperty Name="PresenceID" ColumnName="PresenceID" />
+                <ScalarProperty Name="InTime" ColumnName="InTime" />
+                <ScalarProperty Name="OutTime" ColumnName="OutTime" />
+                <ScalarProperty Name="Presence_Date" ColumnName="Presence_Date" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="ObiectID" ColumnName="ObiectID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="HRMS_DBModel.Projects">
+              <MappingFragment StoreEntitySet="Projects">
+                <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="DataProjectStart" ColumnName="DataProjectStart" />
+                <ScalarProperty Name="DataProjectEnd" ColumnName="DataProjectEnd" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ObiectID" ColumnName="ObiectID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Salary">
+            <EntityTypeMapping TypeName="HRMS_DBModel.Salary">
+              <MappingFragment StoreEntitySet="Salary">
+                <ScalarProperty Name="SalaryID" ColumnName="SalaryID" />
+                <ScalarProperty Name="SalaryValue" ColumnName="SalaryValue" />
+                <ScalarProperty Name="EmployeeType_ID" ColumnName="EmployeeType_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="HRMS_DBModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="HRMS_DBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
